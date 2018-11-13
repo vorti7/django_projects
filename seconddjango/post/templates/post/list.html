@@ -1,5 +1,10 @@
 {% extends 'post/base.html' %}
 
 {% block body_block %}
-<h1>This is list.html</h1>
+    <h1>This is list.html</h1>
+    {% for post in posts %}
+    <h3>{{post.title}}</h3>
+    <h5>{{post.content}}</h5>
+    <a href="{% url 'post:detail' id=post.id %}">Click!</a>
+    {% endfor %}
 {% endblock %}

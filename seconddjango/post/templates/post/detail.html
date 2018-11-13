@@ -1,0 +1,8 @@
+{% extends 'post/base.html' %}
+
+{% block body_block %}
+    <h1>{{post.title}}</h1>
+    {{post.content|safe}}
+    <a href="{% url 'post:update' id=post.id %}">Edit</a>
+    <a href="{% url 'post:delete' id=post.id %}">Delete</a>
+{% endblock %}

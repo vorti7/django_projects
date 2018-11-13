@@ -7,7 +7,8 @@ from .models import Post
 #     return render(request, 'post/index.html')
 
 def list(request):
-    return render(request, 'post/list.html')
+    posts = Post.objects.all()
+    return render(request, 'post/list.html', {'posts':posts})
     
 def create(request):
     if request.method == "POST":
@@ -22,3 +23,26 @@ def create(request):
     else:
         form = PostForm()
     return render(request, 'post/create.html', {'form':form})
+    
+def detail(request,id):
+    post = Post.objects.get(id=id)
+    return render(request,'post/detail.html',{'post':post})
+def update(request, id):
+    post = Post.objects.get(id=id)
+    if request.method == "POST":
+        form = PostForm(request.POST)
+        if form.is_valid():
+            # title = form.cleaned_data['title']
+            title = form.cleaned_data.get('title')
+            content = form.cleaned_data.get('content')
+            Post.objects.create(title=title, content=content)
+            
+            return redirect(resolve_url('post:list'))
+    else:
+        form = PostForm({'title':post.title, 'content':post.content})
+    return render(request, 'post/update.html', {'post':post, 'form': form})
+    
+def delete(request, id):
+    post = Post.objects.get(id=id)
+    post.delete()
+    return redirect(resolve_url('post:list'))
