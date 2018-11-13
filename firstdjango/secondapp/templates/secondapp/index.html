@@ -1,0 +1,9 @@
+{% extends 'secondapp/base.html' %}
+{% block body_block %}
+    <h1>This is SecondApp's index</h1>
+    {% for todo in todos %}
+        {{todo.title}}
+        {{todo.deadline}}
+        <a href="/todos/{{todo.id}}">글 보 기</a>
+    {% endfor %}
+{% endblock %}

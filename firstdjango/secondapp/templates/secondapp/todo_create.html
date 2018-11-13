@@ -1,0 +1,10 @@
+{% extends 'secondapp/base.html' %}
+
+{% block body_block %}
+<form action = "/todos/todo_create/" method = "POST">
+    {%csrf_token%}
+    <input type="text" name="title"/>
+    <input type="date" name="deadline"/>
+    <input type="submit" value="Submit"/>
+</form>
+{% endblock %}

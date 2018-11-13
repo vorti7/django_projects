@@ -1,0 +1,9 @@
+{% extends 'secondapp/base.html' %}
+
+{% block body_block %}
+    <h1>{{todo.title}}</h1>
+    <h4>{{todo.deadline}}</h4>
+    <a href="/todos/{{todo.id}}/update">수 정</a>
+    <!--<a href="{% url 'todo:update' id=todo.id %}">또다른 수정</a>-->
+    <a href="/todos/{{todo.id}}/delete">삭 제</a>
+{% endblock %}

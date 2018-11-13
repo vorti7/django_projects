@@ -1,0 +1,9 @@
+{% extends 'secondapp/base.html' %}
+{% block body_block %}
+<form action = "/todos/{{todo.id}}/update" method="post">
+    {% csrf_token %}
+    <input type="text" name="title", value="{{todo.title}}"/>
+    <input type="date" name="deadline" value="{{deadline}}"/>
+    <input type="submit" value="Submit"/>
+</form>
+{% endblock %}
