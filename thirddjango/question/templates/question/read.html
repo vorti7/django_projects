@@ -1,0 +1,36 @@
+{% extends 'question/base.html' %}
+{% block body_block %}
+    <h2>{{question.title}}</h3>
+    <h3>{{question.answerA}} VS {{question.answerB}}</h3>
+    
+    <h5>{{anA|length}} vs {{anB|length}}</h5>
+    <a href="{% url 'question:update' id=question.id %}">E d i t</a>
+    <a href="{% url 'question:delete' id=question.id %}">D e l e t e</a>
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" style="width: {{anAper}}%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">{{anAper|floatformat}}</div>
+      <div class="progress-bar bg-success" role="progressbar" style="width: {{anBper}}%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">{{anBper|floatformat}}</div>
+     </div>
+    
+    <form action = "{% url 'question:comment_create' question.id %}" method = "POST">
+        {% csrf_token %}
+        <table>
+            {{form.as_table}}
+        </table>
+        <input type="submit" value="Submit"/>
+    </form>
+    <!--{% for comment in question.comment_set.all %}-->
+    <!--    <h5>{{comment.content}}</h5>-->
+    <!--{% endfor %}-->
+    <h2>L E F T</h2>
+    {% for aa in anA %}
+    <h5>{{aa.content}}</h5>
+    <a href="{% url 'question:comment_update' id=question.id cid=aa.id %}">E d i t</a>
+    <a href="{% url 'question:comment_delete' id=question.id cid=aa.id %}">D e l e t e</a>
+    {% endfor %}
+    <h2>R I G H T</h2>
+    {% for ab in anB %}
+    <h5>{{ab.content}}</h5>
+    <a href="{% url 'question:comment_update' id=question.id cid=ab.id %}">E d i t</a>
+    <a href="{% url 'question:comment_delete' id=question.id cid=ab.id %}">D e l e t e</a>
+    {% endfor %}
+{% endblock %}

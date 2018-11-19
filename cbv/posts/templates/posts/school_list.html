@@ -1,0 +1,7 @@
+{% extends 'posts/base.html' %}
+{% block body_block %}
+    {% for school in school_list %}
+        <h1>{{school.name}}</h1>
+        <a href="{% url 'posts:delete' pk=school.pk %}">D E L E T E</a>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'question/base.html' %}
+
+{% block body_block %}
+<h3>this is list</h3>
+
+{% load bootstrap_pagination %}
+{% for question in questions %}
+<h3>{{question.title}}</h3>
+<h5>{{question.answerA}}</h5>
+<h5>{{question.answerB}}</h5>
+<a href="{% url 'question:read' id=question.id %}">Click!</a>
+{% endfor %}
+{% bootstrap_paginate questions range=5 show_first_last=True %}
+{% endblock %}
